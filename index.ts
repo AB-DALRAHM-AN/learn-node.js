@@ -2,24 +2,30 @@
 
 // const http = require('http'); // => CommonJS Module
 import * as http from "http"; // => ES6 Module
-import { json } from "stream/consumers";
 
-const data = JSON.stringify({
-  name: "John Doe",
-  age: 25,
-  email: "aaa@gmail.com",
-  isStudent: true,
-  subjects: ["Math", "Science", "English"],
-  address: {
-    city: "New York",
-    state: "NY",
-    country: "USA",
-  },
-});
+const data = {
+  products: [
+    {
+      id: 1,
+      name: "Product 1",
+      price: 100,
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      price: 200,
+    },
+    {
+      id: 3,
+      name: "Product 3",
+      price: 300,
+    },
+  ],
+};
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/json" });
-  res.write(data); // res.write => Write the Response Body
+  res.write(JSON.stringify(data)); // res.write => Write the Response Body
   res.end("<div>End</div>"); // res.end => End the Response and Send the Response Body
 });
 
