@@ -2,7 +2,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.ts"
+    "dev": "tsc && node ./dist/index.js"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
