@@ -1,0 +1,20 @@
+# gitignore file
+# ignore node_modules
+node_modules
+# ignore .env file
+.env
+# ignore .DS_Store file
+.DS_Store
+# ignore .vscode folder
+.vscode
+# ignore .idea folder
+.idea
+# ignore .cache folder
+.cache
+# ignore .next folder
+.next
+# ignore .nuxt folder
+.nuxt
+# ignore .yarn folder
+.yarn
+
