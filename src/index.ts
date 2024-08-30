@@ -62,7 +62,7 @@ const data = {
       id: 4,
       name: "Product 4",
       price: 400,
-    }
+    },
   ],
 };
 
@@ -78,9 +78,9 @@ const server = http.createServer((req, res) => {
     res.write("<h1>About Page</h1>");
     res.end();
     return;
-  } else if (req.url === "/api/products") {
-    res.writeHead(200, { "Content-Type": "text/json" });
-    res.write(JSON.stringify(data));
+  } else if (req.method === "POST" && req.url === "/api/add-products") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.write("<h1>Product Added</h1>");
     res.end();
     return;
   } else {
@@ -101,4 +101,3 @@ server.listen(port, () => {
 }); // Listen for Incoming Requests on Port 5000
 
 // ** URL => http://localhost:5000 => Browser => Compile => JavaScript => Node.js => Server => Response => Browser => Display
-
