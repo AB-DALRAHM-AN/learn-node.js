@@ -10,6 +10,28 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/products", (req, res) => {
+  const filteredQuery = req.query.filter as string;
+  console.log(filteredQuery);
+
+  if (filteredQuery) {
+    const filterQuery = filteredQuery.split(",");
+
+    let filteredProducts = [];
+
+    filteredProducts = products.map((product) => {
+      const filteredProduct: any = {};
+      filterQuery.forEach((filter) => {
+        if (product.hasOwnProperty(filter)) {
+          filteredProduct[filter] = product[filter as keyof typeof product];
+        }
+
+      });
+      return filteredProduct;
+    });
+
+    res.send(filteredProducts);
+  }
+
   res.send(products);
 });
 
