@@ -3,9 +3,7 @@ import { productFakeData } from "./utils/fakeData";
 
 const app = express();
 
-app.use(express.json({
-  type: "custom/json",
-}));
+app.use(express.json());
 
 const products = productFakeData();
 
@@ -47,8 +45,23 @@ app.get("/api/products/:id", (req, res) => {
 });
 
 app.post("/api/products", (req, res) => {
-  console.log(req.body);
-  res.send("Product is saved successfully");
+  const newProduct = req.body;
+
+  if (!newProduct.name || !newProduct.price) {
+    res.status(400).send("Name and price are required");
+  }
+
+  products.push({
+    id: products.length + 1,
+    name: newProduct.name,
+    price: newProduct.price,
+  });
+
+  res.status(201).send({
+    id: products.length + 1,
+    name: newProduct.name,
+    price: newProduct.price,
+  });
 });
 
 const PORT = 5000;
