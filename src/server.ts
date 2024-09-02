@@ -88,6 +88,27 @@ app.patch("/api/products/:id", (req, res) => {
   }
 });
 
+app.delete("/api/products/:id", (req, res) => {
+  const productID = +req.params.id;
+
+  if (isNaN(productID)) {
+    res.status(400).send("Invalid ID supplied");
+  }
+
+  const product = products.find((p) => p.id === productID);
+  if (!product) {
+    res.status(404).send("Product not found");
+  } else {
+    products.map((p) => {
+      if (p.id === productID) {
+        products.splice(products.indexOf(p), 1);
+      }
+    });
+    res.status(200).send({
+      message: "Product deleted successfully",
+    });
+  }
+});
 const PORT = 5000;
 
 app.listen(PORT, () => {
