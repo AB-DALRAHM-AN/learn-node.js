@@ -3,6 +3,8 @@ import { productFakeData } from "./utils/fakeData";
 
 const app = express();
 
+app.use(express.json());
+
 const products = productFakeData();
 
 app.get("/", (req, res) => {
@@ -24,9 +26,8 @@ app.get("/api/products", (req, res) => {
         if (product.hasOwnProperty(filter)) {
           filteredProduct[filter] = product[filter as keyof typeof product];
         }
-
       });
-      return {id: product.id, ...filteredProduct};
+      return { id: product.id, ...filteredProduct };
     });
 
     res.send(filteredProducts);
@@ -42,6 +43,12 @@ app.get("/api/products/:id", (req, res) => {
   }
   res.send(product);
 });
+
+app.post("/api/products", (req, res) => {
+  console.log(req.body);
+  res.send("Product is saved successfully");
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => {
