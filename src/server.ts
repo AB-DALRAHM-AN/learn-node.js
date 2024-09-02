@@ -82,10 +82,10 @@ app.patch("/api/products/:id", (req, res) => {
         p.name = updatedProduct.name;
       }
     });
-    res.send(products);
+    res.status(200).send({
+      message: "Product updated successfully",
+    });
   }
-
-  res.send(products);
 });
 
 const PORT = 5000;
