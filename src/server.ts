@@ -3,7 +3,9 @@ import { productFakeData } from "./utils/fakeData";
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({
+  type: "custom/json",
+}));
 
 const products = productFakeData();
 
