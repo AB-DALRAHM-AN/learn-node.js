@@ -26,7 +26,7 @@ app.get("/api/products", (req, res) => {
         }
 
       });
-      return filteredProduct;
+      return {id: product.id, ...filteredProduct};
     });
 
     res.send(filteredProducts);
