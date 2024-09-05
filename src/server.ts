@@ -21,11 +21,7 @@ app.get("/api/products", (req, res) =>
 );
 
 app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id === +req.params.id);
-  if (!product) {
-    res.status(404).send("Product not found");
-  }
-  res.send(product);
+  res.send(productController.getProductById(req, res))
 });
 
 app.post("/api/products", (req, res) => {

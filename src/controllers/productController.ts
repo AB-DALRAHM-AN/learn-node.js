@@ -13,6 +13,17 @@ class ProductController {
     }
     return this.ProductService.getAll();
   }
+
+  getProductById(req: Request, res: Response): void {
+    const id = +req.params.id;
+    const product = this.ProductService.getProductsById(id);
+
+    if (!product) {
+      res.status(404).send("Product not found");
+    }
+
+    res.send(product);
+  }
 }
 
 export default ProductController;

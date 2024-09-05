@@ -11,7 +11,6 @@ export class ProductService {
   }
 
   filterQuery(filterQuery?: string) {
-
     if (filterQuery) {
       const filteredQuery = filterQuery.split(",");
 
@@ -27,9 +26,13 @@ export class ProductService {
         return { id: product.id, ...filteredProduct };
       });
 
-      return filteredProducts
+      return filteredProducts;
     }
 
-    return this.getAll()
+    return this.getAll();
+  }
+
+  getProductsById(paramsId: number) {
+    return this.getAll().find((p) => p.id === paramsId);
   }
 }
