@@ -16,32 +16,9 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.get("/api/products", (req, res) => {
-  return res.send(productController.getProducts());
-
-  const filteredQuery = req.query.filter as string;
-  console.log(filteredQuery);
-
-  if (filteredQuery) {
-    const filterQuery = filteredQuery.split(",");
-
-    let filteredProducts = [];
-
-    filteredProducts = products.map((product) => {
-      const filteredProduct: any = {};
-      filterQuery.forEach((filter) => {
-        if (product.hasOwnProperty(filter)) {
-          filteredProduct[filter] = product[filter as keyof typeof product];
-        }
-      });
-      return { id: product.id, ...filteredProduct };
-    });
-
-    res.send(filteredProducts);
-  }
-
-  res.send(products);
-});
+app.get("/api/products", (req, res) =>
+  res.send(productController.getProducts(req))
+);
 
 app.get("/api/products/:id", (req, res) => {
   const product = products.find((p) => p.id === +req.params.id);
