@@ -9,7 +9,7 @@ app.use(express.json());
 
 const products = productFakeData();
 
-const productService = new ProductService();
+const productService = new ProductService(products);
 const productController = new ProductController(productService);
 
 app.get("/", (req, res) => {

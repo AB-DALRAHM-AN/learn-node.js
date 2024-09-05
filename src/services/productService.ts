@@ -1,9 +1,9 @@
 import { Product } from "../interfaces";
-import { productFakeData } from "../utils/fakeData";
-const fakeProducts = productFakeData();
 
 export class ProductService {
-  private readonly products: Product[] = fakeProducts;
+  constructor(private products: Product[]) {
+    this.products = products;
+  }
 
   getAll() {
     return this.products;
