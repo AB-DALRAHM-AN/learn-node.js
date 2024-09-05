@@ -35,4 +35,28 @@ export class ProductService {
   getProductsById(paramsId: number) {
     return this.getAll().find((p) => p.id === paramsId);
   }
+
+  addProduct(newProduct: Product) {
+    this.getAll().push({
+      id: this.getAll().length + 1,
+      name: newProduct.name,
+      price: newProduct.price,
+    });
+  }
+
+  updateProduct(productId: number, updatedProduct: Product) {
+    this.getAll().map((p) => {
+      if (p.id === productId) {
+        p.name = updatedProduct.name;
+      }
+    });
+  }
+
+  deleteProduct(productId: number) {
+    this.getAll().map((p) => {
+      if (p.id === productId) {
+        this.getAll().splice(this.getAll().indexOf(p), 1);
+      }
+    });
+  }
 }
