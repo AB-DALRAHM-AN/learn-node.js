@@ -6,6 +6,7 @@ import path from "path";
 import ErrorMiddleware from "./middlewares/Error";
 import dotenv from "dotenv";
 import helmet from "helmet";
+import morgan from "morgan";
 import NotFoundMiddleware from "./middlewares/NotFound";
 
 const app = express();
@@ -29,6 +30,8 @@ app.use(
   })
 );
 
+app.use(morgan("dev"))
+
 const products = productFakeData();
 
 const productService = new ProductService(products);
@@ -39,7 +42,6 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/products", (req, res) => {
-  throw new Error("Not Implemented");
   res.send(productController.getProducts(req));
 });
 
