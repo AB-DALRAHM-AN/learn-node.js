@@ -1,10 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 
 export default class ErrorMiddleware {
-
-  handel(req: Request, res: Response, next: NextFunction, err: Error) {
-    if(req.originalUrl.startsWith('/api')) {
-      res.status(500).json({ message: err.message });
+  static handle(err: Error, req: Request, res: Response, next: NextFunction) {
+    if (req.originalUrl.startsWith("/api")) {
+      res.status(500).json({
+        error: "Internal Server Error",
+        message: err.message,
+        stack: err.stack,
+      });
     }
 
     next();
