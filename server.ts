@@ -2,10 +2,19 @@ import express from "express";
 import { productFakeData } from "./utils/fakeData";
 import { ProductService } from "./services/productService";
 import ProductController from "./controllers/productController";
+import path from "path";
 
 const app = express();
-
 app.use(express.json());
+
+app.set('view engine', 'pug');
+
+app.set('views', path.join(__dirname, 'views'));
+
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
 
 const products = productFakeData();
 
@@ -16,9 +25,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.get("/api/products", (req, res) =>
+app.get("/api/products", (req, res) => {
+  throw new Error("Not Implemented")
   res.send(productController.getProducts(req))
-);
+});
 
 app.get("/api/products/:id", (req, res) => {
   res.send(productController.getProductById(req, res))
