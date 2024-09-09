@@ -5,6 +5,7 @@ import ProductController from "./controllers/productController";
 import path from "path";
 import ErrorMiddleware from "./middlewares/Error";
 import dotenv from "dotenv";
+import helmet from "helmet";
 import NotFoundMiddleware from "./middlewares/NotFound";
 
 const app = express();
@@ -19,6 +20,14 @@ app.get("/", (req, res) => {
 });
 
 dotenv.config();
+
+app.use(
+  helmet({
+    xFrameOptions: {
+      action: "deny",
+    },
+  })
+);
 
 const products = productFakeData();
 
