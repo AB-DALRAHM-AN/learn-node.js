@@ -5,6 +5,7 @@ import ProductController from "./controllers/productController";
 import path from "path";
 import ErrorMiddleware from "./middlewares/Error";
 import dotenv from "dotenv";
+import NotFoundMiddleware from "./middlewares/NotFound";
 
 const app = express();
 app.use(express.json());
@@ -66,6 +67,9 @@ app.delete("/api/products/:id", (req, res) => {
 
 // ** with Use Static Method
 app.use(ErrorMiddleware.handle);
+
+// ** NOT FOUND MIDDLEWARE
+app.use(NotFoundMiddleware.handle);
 
 const PORT = 5000;
 app.listen(PORT, () => {
